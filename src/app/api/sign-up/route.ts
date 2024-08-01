@@ -72,7 +72,11 @@ export async function POST(request: Request) {
             username,
             verifyCode
         )
-
+        return Response.json({
+            message: "User created successfully",
+            success: true,
+            emailResponse
+        })
     } catch (error) {
         console.log("Error registering user ", error)
         return Response.json({
