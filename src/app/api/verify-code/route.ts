@@ -5,14 +5,14 @@ import { verifySchema } from "@/schemas/verifySchema";
 import { NextResponse } from "next/server";
 
 const verifyCodeSchema = z.object({
-    verifyUser: verifySchema
+    code: verifySchema.shape.code
 })
 
-export async function GET(req: Request) {
+export async function POST(req: Request) {
     await connectToDb();
     try {
         const { username, code } = await req.json()
-        const result = verifyCodeSchema.safeParse(code)
+        const result = verifyCodeSchema.safeParse({ code })
         if (!result.success) {
             const verifyCodeErrors = result.error.format()?._errors || []
             return NextResponse.json({
@@ -20,7 +20,8 @@ export async function GET(req: Request) {
                 message: verifyCodeErrors
             }, { status: 400 })
         }
-        const decodedUsername = decodeURIComponent(username)
+        const decodedUsername =   await decodeURIComponent(username)
+        console.log(username,code)
         const user = await userModel.findOne({
             username: decodedUsername
         })
@@ -31,8 +32,9 @@ export async function GET(req: Request) {
             }, { status: 500 })
         }
         const isverifyCodevalied = user.verifyCode === code;
+        console.log(isverifyCodevalied, user.verifyCode)
         const isVerifyCodeNotExpired = new Date(user.verifyCodeExpiry) > new Date()
-        if (isverifyCodevalied && !isVerifyCodeNotExpired) {
+        if (isverifyCodevalied && isVerifyCodeNotExpired) {
             user.isVerified = true;
             await user.save();
             return NextResponse.json({

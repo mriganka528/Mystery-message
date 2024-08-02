@@ -3,7 +3,6 @@ import userModel from "@/models/User";
 import { z } from "zod";
 import { usernameValidation } from "@/schemas/signUpSchema";
 import { NextResponse } from "next/server";
-import { url } from "inspector";
 
 const UsernameQuerySchema = z.object({
     username: usernameValidation
