@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form"
 import * as z from "zod"
 import Link from "next/link"
 import React, { useEffect, useState } from 'react'
-import { useDebounceValue } from 'usehooks-ts'
+import { useDebounceValue, useDebounceCallback } from 'usehooks-ts'
 import { useToast } from "@/components/ui/use-toast"
 import { signUpSchema } from "@/schemas/signUpSchema"
 import axios, { AxiosError } from 'axios'
@@ -19,7 +19,7 @@ const page = () => {
     const [usernameMessage, setUsernameMessage] = useState('');
     const [isCheckingUsername, setIsCheckingUsename] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const debouncedUsername = useDebounceValue(username, 300)
+    const debounced = useDebounceCallback(setUsername, 500)
     const { toast } = useToast();
     const router = useRouter();
     //zod implementation
@@ -33,12 +33,14 @@ const page = () => {
     })
     useEffect(() => {
         const checkUsernameUniqueness = async () => {
-            if (debouncedUsername) {
+            if (username) {
                 setIsCheckingUsename(true)
                 setUsernameMessage('')
                 try {
-                    const response = await axios.get(`/api/check/check-username-uniqueness?username=${debouncedUsername}`)
-                    setUsernameMessage(response.data.message)
+                    const response = await axios.get(`/api/check-username-uniqueness?username=${username}`)
+                    let message= response.data.message
+                    console.log(message)
+                    setUsernameMessage(message)
                 } catch (error) {
                     const axiosError = error as AxiosError<ApiResponse>;
                     setUsernameMessage(
@@ -51,7 +53,7 @@ const page = () => {
         }
         checkUsernameUniqueness()
     }
-        , [debouncedUsername])
+        , [username])
     const onSubmit = async (data: z.infer<typeof signUpSchema>) => {
         setIsSubmitting(true);
         try {
@@ -93,9 +95,13 @@ const page = () => {
                                         <FormControl>
                                             <Input placeholder="username" {...field} onChange={(e) => {
                                                 field.onChange(e)
-                                                setUsername(e.target.value)
+                                                debounced(e.target.value)
                                             }} />
                                         </FormControl>
+                                        {isCheckingUsername && <Loader2 className=" animate-spin" />}
+                                        <p className={`text-sm ${usernameMessage === "Username is available" ? 'text-green-500' : 'text-red-500'}`}>
+                                            Test {usernameMessage}
+                                        </p>
                                         <FormMessage />
                                     </FormItem>
                                 )}
@@ -130,7 +136,7 @@ const page = () => {
                                 {
                                     isSubmitting ? (<>
                                         <Loader2 className=" mr-2 h-4 w-5 animate-spin" /> Please wait
-                                    </>) : ('SignUp')
+                                    </>) : ('Sign Up')
                                 }
                             </Button>
                         </form>
