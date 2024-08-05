@@ -20,8 +20,7 @@ export async function POST(req: Request) {
                 message: verifyCodeErrors
             }, { status: 400 })
         }
-        const decodedUsername =   await decodeURIComponent(username)
-        console.log(username,code)
+        const decodedUsername = await decodeURIComponent(username)
         const user = await userModel.findOne({
             username: decodedUsername
         })
@@ -32,7 +31,6 @@ export async function POST(req: Request) {
             }, { status: 500 })
         }
         const isverifyCodevalied = user.verifyCode === code;
-        console.log(isverifyCodevalied, user.verifyCode)
         const isVerifyCodeNotExpired = new Date(user.verifyCodeExpiry) > new Date()
         if (isverifyCodevalied && isVerifyCodeNotExpired) {
             user.isVerified = true;

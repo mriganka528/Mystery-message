@@ -4,7 +4,7 @@ import connectToDb from "@/lib/dbConnect";
 import userModel from "@/models/User";
 import { User } from "next-auth";
 import { NextResponse } from "next/server";
-import { use } from "react";
+
 export async function POST(req: Request) {
     await connectToDb();
     try {
@@ -20,7 +20,7 @@ export async function POST(req: Request) {
         const { acceptMesageStatus } = await req.json();
         const updatedUser = await userModel.findByIdAndUpdate(
             userId, {
-            isAcceptingMessage: acceptMesageStatus
+            acceptMessages: acceptMesageStatus
         },
             {
                 new: true,
@@ -69,7 +69,7 @@ export async function GET(req: Request) {
         }
         return NextResponse.json({
             success: true,
-            acceptingMessageStatus: user.isAcceptingMessages
+            acceptingMessageStatus: foundUser.isAcceptingMessages
         }, {
             status: 200
         })
