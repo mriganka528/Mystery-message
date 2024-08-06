@@ -6,6 +6,7 @@ import { toast } from '@/components/ui/use-toast'
 import { signInSchema } from '@/schemas/signInSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signIn } from 'next-auth/react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 import { useForm } from 'react-hook-form'
@@ -25,19 +26,18 @@ const page = () => {
             identifier: data.identifier,
             password: data.password
         })
-        if(result?.error)
-        {
+        if (result?.error) {
             toast({
-                title:"Login failed",
-                description:"Incurrect username or password",
-                variant:"destructive"
+                title: "Login failed",
+                description: "Incurrect username or password",
+                variant: "destructive"
             })
         }
-        if(result?.url){
+        if (result?.url) {
             router.replace('/dashboard')
         }
     }
-    return ( 
+    return (
         <div className=" flex justify-center items-center min-h-screen bg-gray-100 ">
             <div className=" w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
                 <div className="text-center">
@@ -75,6 +75,14 @@ const page = () => {
                         <Button type="submit">Sign In</Button>
                     </form>
                 </Form>
+                <div className="text-center mt-4">
+                    <p>
+                        Not a member yet?{' '}
+                        <Link href="/sign-up" className="text-blue-600 hover:text-blue-800">
+                            Sign up
+                        </Link>
+                    </p>
+                </div>
             </div>
         </div>
     )

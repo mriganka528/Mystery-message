@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form"
 import * as z from "zod"
 import Link from "next/link"
 import React, { useEffect, useState } from 'react'
-import {  useDebounceCallback } from 'usehooks-ts'
+import { useDebounceCallback } from 'usehooks-ts'
 import { useToast } from "@/components/ui/use-toast"
 import { signUpSchema } from "@/schemas/signUpSchema"
 import axios, { AxiosError } from 'axios'
@@ -38,7 +38,7 @@ const page = () => {
                 setUsernameMessage('')
                 try {
                     const response = await axios.get(`/api/check-username-uniqueness?username=${username}`)
-                    let message= response.data.message
+                    let message = response.data.message
                     console.log(message)
                     setUsernameMessage(message)
                 } catch (error) {
@@ -77,7 +77,7 @@ const page = () => {
         }
     }
     return (
-        <div className=" flex justify-center items-center min-h-screen bg-gray-100 ">
+        <div className=" flex justify-center items-center min-h-screen  bg-gray-100 ">
             <div className=" w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
                 <div className="text-center">
                     <h1 className=" mb-6">Join Mystery message</h1>
