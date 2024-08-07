@@ -10,7 +10,7 @@ export const authOptions: NextAuthOptions = {
             id: "credentials",
             name: "Credentials",
             credentials: {
-                email: { label: "Email", type: "text", placeholder: "jsmith@gmail.com" },
+                identifier: { label: "Email", type: "text", placeholder: "jsmith@gmail.com" },
                 password: { label: "Password", type: "password" }
             },
             async authorize(credentials: any): Promise<any> {
@@ -45,7 +45,7 @@ export const authOptions: NextAuthOptions = {
         })
     ],
     callbacks: {
-        async jwt({ token, user }) {
+        async jwt({ user, token }) {
             if (user) {
                 token._id = user._id?.toString();
                 token.isVerified = user.isVerified;
@@ -53,6 +53,7 @@ export const authOptions: NextAuthOptions = {
                 token.username = user.username;
 
             }
+            // console.log("TOKENNNNNN :", token)
             return token;
         },
         async session({ session, token }) {
@@ -63,17 +64,17 @@ export const authOptions: NextAuthOptions = {
 
                 session.user.username = token.username;
             }
+            // console.log("Sessssssssssion :", session)
             return session;
         }
-    },
-    pages:
-    {
-        signIn: "/sign-in"
     },
     session:
     {
         strategy: "jwt"
     },
+    pages:
+    {
+        signIn: "/sign-in"
+    },
     secret: process.env.SECRET_KEY
-
 } 

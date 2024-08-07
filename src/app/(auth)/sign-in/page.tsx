@@ -26,6 +26,7 @@ const page = () => {
             identifier: data.identifier,
             password: data.password
         })
+        console.log(result)
         if (result?.error) {
             toast({
                 title: "Login failed",
@@ -34,6 +35,8 @@ const page = () => {
             })
         }
         if (result?.url) {
+            console.log("Executedddd")
+
             router.replace('/dashboard')
         }
     }

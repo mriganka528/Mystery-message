@@ -1,3 +1,4 @@
+'use client';
 import MessageCard from '@/components/messageCard/MessageCard'
 import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
@@ -30,6 +31,7 @@ function page() {
     const acceptMessages = watch('acceptMessages');
     const fetchAcceptMessage = useCallback(async () => {
         setIsSwitchLoading(true)
+        console.log(session)
         try {
             const response = await axios.get<ApiResponse>('/api/accept-messages ')
             setValue('acceptMessages', response.data.isAcceptingMessages)
@@ -98,11 +100,12 @@ function page() {
             })
         }
     }
-    const { username } = session?.user as User
+    const username = session?.user as User || 'defaultUsername'
     const baseUrl = `${window.location.protocol}//${window.location.host}`
     const profileUrl = `${baseUrl}/u/${username}`
 
     const copyToClipboard = () => {
+        console.log(username)
         navigator.clipboard.writeText(profileUrl)
         toast({
             title: "URL copied",

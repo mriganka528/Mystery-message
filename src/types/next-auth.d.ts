@@ -1,13 +1,5 @@
 import "next-auth"
-import { DefaultSession } from "next-auth"
-import { string } from "zod"
 declare module 'next-auth' {
-    interface User {
-        _id?: string,
-        isVerified: ?boolean,
-        isAcceptingMessages: ?boolean,
-        username: ?string
-    }
     interface Session {
         user: {
             _id?: string,
@@ -16,12 +8,18 @@ declare module 'next-auth' {
             username: ?string
         } & DefaultSession['user']
     }
-}
-declare module 'next-auth/jwt' {
-    interface JWT {
+    interface User {
         _id?: string,
         isVerified: ?boolean,
         isAcceptingMessages: ?boolean,
         username: ?string
-    } 
+    }
+}
+declare module 'next-auth/jwt' {
+    interface JWT {
+        _id?: string;
+        isVerified: ?boolean;
+        isAcceptingMessages: ?boolean;
+        username: ?string;
+    }
 }
