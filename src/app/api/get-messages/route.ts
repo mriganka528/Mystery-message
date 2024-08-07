@@ -9,21 +9,25 @@ export async function GET(req: Request) {
     try {
         await connectToDb();
         const session = await getServerSession(authOptions);
-        const user = session?.user as User
-        if (!session || session.user) {
+        const _user: User = session?.user
+        if (!session || !_user) {
+            console.log("Heloooooooooooooooo")
             return NextResponse.json({
                 success: false,
                 message: "Not authenticated"
             }, { status: 401 })
         }
-        const userId = new mongoose.Types.ObjectId(user._id);
+        const userId = new mongoose.Types.ObjectId(_user._id);
+        console.log(userId);
         const findUser = await userModel.aggregate([
-            { $match: { id: userId } },
-            { $unwind: '$messages' },
+            { $match: { _id: userId } },
+            { $unwind: { path: '$messages', preserveNullAndEmptyArrays: true } }, //to Ensure it works even if 'messages' is empty
             { $sort: { 'messages.createdAt': -1 } },
-            { $group: { _id: '$_id', messages: { $push: '$messages' } } }
-        ])
+            { $group: { _id: '$_id', messages: { $push: '$messages' } } },
+        ]).exec();
+        console.log("Found user :", findUser);
         if (!findUser || findUser.length === 0) {
+
             return NextResponse.json({
                 success: false,
                 message: "User not found"
