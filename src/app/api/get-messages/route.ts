@@ -25,7 +25,6 @@ export async function GET(req: Request) {
             { $sort: { 'messages.createdAt': -1 } },
             { $group: { _id: '$_id', messages: { $push: '$messages' } } },
         ]).exec();
-        console.log("Found user :", findUser);
         if (!findUser || findUser.length === 0) {
 
             return NextResponse.json({

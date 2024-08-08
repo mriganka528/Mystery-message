@@ -5,19 +5,23 @@ import { useSession, signOut } from 'next-auth/react'
 useSession
 import { User } from 'next-auth'
 import { Button } from '../ui/button'
+import { ModeToggle } from '../toggleTheme/ToggleTheme'
 const Navbar = () => {
     const { data: session } = useSession()
     const user: User = session?.user as User
     return (
-        <nav>
-            <div>
-                <a href="/">Mystry message</a>
+        <nav className='fixed w-svw'>
+            <div className='flex justify-between px-5 lg:px-10 py-5 shadow-md backdrop-blur-sm'>
+                <Link href="/" className='flex justify-center items-center'>Mystry message</Link>
                 {
                     session ? (
                         <>
 
-                            <span>Welcome, {user?.username || user?.email}</span>
-                            <Button onClick={() => signOut()}>Logout</Button>
+                            <span className=' flex justify-center items-center'>Welcome, {user?.username || user?.email}</span>
+                            <div className='flex justify-center items-center space-x-1'>
+                                <Button onClick={() => signOut()}>Logout</Button>
+                                <ModeToggle />
+                            </div>
                         </>
                     ) : (
                         <>

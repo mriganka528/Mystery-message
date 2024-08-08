@@ -45,7 +45,7 @@ function Page() {
         } finally {
             setIsSwitchLoading(false);
         }
-    }, [setValue, toast, session]);
+    }, [setValue, toast]);
 
     const fetchMessages = useCallback(async (refresh: boolean = false) => {
         setIsLoading(true);
@@ -85,13 +85,14 @@ function Page() {
     const handleSwitchChange = async () => {
         try {
             const response = await axios.post<ApiResponse>('/api/accept-messages', {
-                acceptMessages: !acceptMessages
+                isAcceptingMessages: !acceptMessages
             });
             setValue('acceptMessages', !acceptMessages);
             toast({
                 title: response.data.message,
                 variant: 'default'
             });
+            console.log("Response :", response);
         } catch (error) {
             const axiosError = error as AxiosError<ApiResponse>;
             toast({
@@ -128,7 +129,7 @@ function Page() {
     }
 
     return (
-        <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
+        <div className="my-8 mx-4 md:mx-8 lg:mx-auto pt-24 p-6 bg-white rounded w-full max-w-6xl">
             <h1 className="text-4xl font-bold mb-4">User Dashboard</h1>
 
             <div className="mb-4">
