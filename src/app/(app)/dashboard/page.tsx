@@ -72,7 +72,7 @@ function Page() {
             setIsSwitchLoading(false);
         }
     }, [setIsLoading, setMessages, toast]);
-
+    //To fatch initial value from the server;
     useEffect(() => {
         if (!session || !session.user) {
             return;
@@ -92,7 +92,6 @@ function Page() {
                 title: response.data.message,
                 variant: 'default'
             });
-            console.log("Response :", response);
         } catch (error) {
             const axiosError = error as AxiosError<ApiResponse>;
             toast({
