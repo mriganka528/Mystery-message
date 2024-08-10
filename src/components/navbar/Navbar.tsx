@@ -10,22 +10,24 @@ const Navbar = () => {
     const { data: session } = useSession()
     const user: User = session?.user as User
     return (
-        <nav className='fixed w-svw'>
-            <div className='flex justify-between px-5 lg:px-10 py-5 shadow-md backdrop-blur-sm'>
-                <Link href="/" className='flex justify-center items-center'>Mystry message</Link>
+        <nav className='fixed w-svw z-50'>
+            <div className='flex  justify-between px-5 lg:px-10 py-5 shadow-md dark:shadow-gray-800 dark:shadow backdrop-blur-sm'>
+                <Link href="/" className='flex justify-center items-center antialiased font-bold text-xl  '>MysticPulse</Link>
                 {
                     session ? (
                         <>
-
                             <span className=' flex justify-center items-center'>Welcome, {user?.username || user?.email}</span>
-                            <div className='flex justify-center items-center space-x-1'>
+                            <div className='flex justify-center items-center space-x-3'>
                                 <Button onClick={() => signOut()}>Logout</Button>
                                 <ModeToggle />
                             </div>
                         </>
                     ) : (
                         <>
-                            <Link href={'/sign-in'}>Sign in</Link>
+                            <div className='flex justify-center items-center space-x-3'>
+                                <Link href={'/sign-in'} className=' flex justify-center items-center bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-3 py-2 rounded'>Sign in</Link>
+                                <ModeToggle />
+                            </div>
                         </>
                     )
                 }

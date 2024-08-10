@@ -1,0 +1,28 @@
+{
+    "messages": [
+        {
+            "id": 1,
+            "title": "Messages from user111",
+            "content": "Hey bro, how are you doing?",
+            "received": "45 minutes ago"
+        },
+        {
+            "id": 2,
+            "title": "Message from RengokuSen",
+            "content": "Would you like to fight with me?",
+            "received": "2 minutes ago"
+        },
+        {
+            "id": 3,
+            "title": "Message from LightYagami",
+            "content": "Heyyy! What's your current favourite song",
+            "received": "19 minutes ago"
+        },
+        {
+            "id": 4,
+            "title": "Message from Lakshyaa343",
+            "content": "How to play badminton like you?",
+            "received": "2 days ago"
+        }
+    ]
+}
