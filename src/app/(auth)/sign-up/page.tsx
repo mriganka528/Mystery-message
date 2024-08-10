@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Loader2 } from "lucide-react"
 import { useRouter } from "next/navigation"
+import Image from "next/image"
 const page = () => {
     const [username, setUsername] = useState('');
     const [usernameMessage, setUsernameMessage] = useState('');
@@ -77,8 +78,15 @@ const page = () => {
         }
     }
     return (
-        <div className=" flex justify-center items-center min-h-screen  bg-gray-100 ">
-            <div className=" w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+        <div className=" flex flex-col justify-around items-center min-h-screen  ">
+            <div className="mt-3 w-full flex justify-center  ">
+                <Link href={'/'} className=" shadow-md dark:shadow-gray-900 flex justify-center w-[30%] space-x-2 pb-3 rounded-sm items-center">
+
+                    <Image src={'/assets/undraw_moving_forward.svg'} alt="Loading" height={55} width={55}></Image>
+                    <h1 className="text-4xl antialiased text-left  font-bold ">MysticPulse</h1>
+                </Link>
+            </div>
+            <div className=" w-full max-w-md p-8 space-y-8  rounded-lg dark:shadow-gray-900 shadow-md">
                 <div className="text-center">
                     <h1 className=" mb-6">Join Mystery message</h1>
                     <p className=" mb-4">Signup to start your anonymous adventure</p>
@@ -100,7 +108,7 @@ const page = () => {
                                         </FormControl>
                                         {isCheckingUsername && <Loader2 className=" animate-spin" />}
                                         <p className={`text-sm ${usernameMessage === "Username is available" ? 'text-green-500' : 'text-red-500'}`}>
-                                            Test {usernameMessage}
+                                            {usernameMessage}
                                         </p>
                                         <FormMessage />
                                     </FormItem>
@@ -143,7 +151,7 @@ const page = () => {
                     </Form>
                     <div className="text-center mt-4">
                         <p>
-                            Already a member?{''}
+                            Already a member?{' '}
                             <Link href={'/sign-in'} className=" text-blue-600 hover:text-blue-800">
                                 Sign in
                             </Link>

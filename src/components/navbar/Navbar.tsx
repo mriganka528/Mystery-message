@@ -16,7 +16,6 @@ const Navbar = () => {
                 {
                     session ? (
                         <>
-                            <span className=' flex justify-center items-center'>Welcome, {user?.username || user?.email}</span>
                             <div className='flex justify-center items-center space-x-3'>
                                 <Button onClick={() => signOut()}>Logout</Button>
                                 <ModeToggle />

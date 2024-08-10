@@ -6,6 +6,7 @@ import { toast } from '@/components/ui/use-toast'
 import { signInSchema } from '@/schemas/signInSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signIn } from 'next-auth/react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React from 'react'
@@ -41,10 +42,16 @@ const page = () => {
         }
     }
     return (
-        <div className=" flex justify-center items-center min-h-screen bg-gray-100 ">
-            <div className=" w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+        <div className=" flex  flex-col justify-around items-center min-h-screen   ">
+            <div className="mt-2 w-full flex justify-center  ">
+                <Link href={'/'} className=" shadow-md dark:shadow-gray-900 flex justify-center w-[30%] space-x-2 pb-3 rounded-sm items-center">
+                    <Image src={'/assets/undraw_moving_forward.svg'} alt="Loading" height={55} width={55}></Image>
+                    <h1 className="text-4xl antialiased text-left  font-bold ">MysticPulse</h1>
+                </Link>
+            </div>
+            <div className=" w-full max-w-md p-8 space-y-8 dark:shadow-gray-900 rounded-lg shadow-md">
                 <div className="text-center">
-                    <h1 className=" mb-6">Join Mystery Message</h1>
+                    <h1 className=" mb-6">Join MysticPulse</h1>
                     <p className=" mb-4">Sign in to start your anonymous adventure</p>
                 </div>
                 <Form {...form}>
