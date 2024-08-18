@@ -18,7 +18,6 @@ export async function GET(req: Request) {
             }, { status: 401 })
         }
         const userId = new mongoose.Types.ObjectId(_user._id);
-        console.log(userId);
         const findUser = await userModel.aggregate([
             { $match: { _id: userId } },
             { $unwind: { path: '$messages', preserveNullAndEmptyArrays: true } }, //to Ensure it works even if 'messages' is empty

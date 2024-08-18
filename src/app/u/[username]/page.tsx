@@ -37,7 +37,7 @@ const page = () => {
             })
             toast({
                 description: response.data.message,
-            })
+            }) 
             console.log(response);
             form.reset({ ...form.getValues(), content: '' })
         } catch (error) {
@@ -64,7 +64,7 @@ const page = () => {
                 <Image src={'/assets/undraw_link_shortener.svg'} alt='profile link image' height={48} width={48}></Image>
                 <span className=' text-3xl'>Public Profile Link</span>
             </div>
-            <div>
+            <div className=' px-7 sm:px-14'>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                         <FormField

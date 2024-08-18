@@ -20,7 +20,7 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
-import { X } from 'lucide-react'
+import { Trash2, X } from 'lucide-react'
 import { Message } from '@/models/User'
 import { useToast } from '../ui/use-toast'
 import axios from 'axios'
@@ -40,19 +40,24 @@ const MessageCard = ({ message, onMessageDelete }: MessageCardProps) => {
         onMessageDelete(message._id)
     }
     return (
-        <Card>
-            <CardHeader>
-                <CardTitle>Card Title</CardTitle>
-                <AlertDialog>
+        <Card className='shadow-md dark:shadow-gray-900'>
+            <CardContent className='pt-6'>
+                {message.content}
+            </CardContent>
+            <div className='flex justify-between pr-1'>
+                <div className='pl-5 pb-2 flex  items-end'>
+                    <span className='text-sm text-gray-400'> Delivered on : {new Date(message.createdAt).toLocaleDateString()} &nbsp;{new Date(message.createdAt).toLocaleTimeString()}</span>
+                </div>
+                <AlertDialog >
                     <AlertDialogTrigger asChild>
-                        <Button variant="destructive"><X className='w-5 h-5' /></Button>
+                        <Button variant="destructive" size={'delt'}><Trash2 className='h-4 w-4' /></Button>
                     </AlertDialogTrigger>
                     <AlertDialogContent>
                         <AlertDialogHeader>
                             <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
                             <AlertDialogDescription>
                                 This action cannot be undone. This will permanently delete your
-                                account and remove your data from our servers.
+                                data and remove your data from our servers.
                             </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
@@ -61,12 +66,9 @@ const MessageCard = ({ message, onMessageDelete }: MessageCardProps) => {
                         </AlertDialogFooter>
                     </AlertDialogContent>
                 </AlertDialog>
-                <CardDescription>Card Description</CardDescription>
-            </CardHeader>
-            <CardContent>
-                <p>Card Content</p>
-            </CardContent>
+            </div>
         </Card>
+
 
     )
 }
