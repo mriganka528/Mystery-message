@@ -135,7 +135,7 @@ function Page() {
                 <Image src={'/assets/undraw_welcoming.svg'} alt='welcome image' height={55} width={55}></Image>
                 <h1 className='text-center antialiased text-xl font-medium ' >Welcome, {session.user.username}</h1>
             </div>
-            <div className='my-8 mx-0 sm:mx-4 md:mx-8 lg:mx-auto pt-10 p-6 sm:border-l-2  border-l-0 pl-9  rounded w-full max-w-5xl'>
+            <div className='my-8 mx-0 sm:mx-4 md:mx-8 lg:mx-auto pt-10 p-6 lg:border-l-2  border-l-0 pl-9  rounded w-full max-w-5xl'>
                 <div className=' flex items-center '>
                     <LayoutDashboard className=' h-7 w-7 antialiased inline' />
                     <span className="text-3xl pl-2 antialiased font-semibold ">User Dashboard</span>
