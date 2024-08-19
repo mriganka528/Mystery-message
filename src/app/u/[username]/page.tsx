@@ -10,7 +10,7 @@ import {
     FormMessage,
 } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
-import { Loader2 } from 'lucide-react';
+import { Loader2, RotateCwSquare } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -20,6 +20,8 @@ import { useParams } from 'next/navigation';
 import axios, { AxiosError } from 'axios';
 import { ApiResponse } from '@/types/ApiResponse';
 import { toast } from '@/components/ui/use-toast';
+import sampleMessages from '@/data/sampleMessages.json'
+import Link from 'next/link';
 const page = () => {
     const params = useParams<{ username: string }>();
     const username = params.username;
@@ -37,7 +39,7 @@ const page = () => {
             })
             toast({
                 description: response.data.message,
-            }) 
+            })
             console.log(response);
             form.reset({ ...form.getValues(), content: '' })
         } catch (error) {
@@ -52,6 +54,21 @@ const page = () => {
             setLoading(false)
         }
     }
+
+    const getRandomMessages = () => {
+        const shuffled = [...sampleMessages.questions].sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, 4);
+    };
+    const [displyMessages, setDisplyMessages] = useState(getRandomMessages);
+    const handleRefresh = () => {
+        setDisplyMessages(getRandomMessages());
+    };
+    const handleCopy = (message: string) => {
+        form.setValue('content', message);
+        toast({
+            title:"Message successfully copied"
+        })
+    }
     return (
         <div>
             <div className="mt-10 flex justify-center  ">
@@ -60,11 +77,11 @@ const page = () => {
                     <h1 className="text-4xl antialiased text-left  font-bold ">MysticPulse</h1>
                 </div>
             </div>
-            <div className=' flex justify-center gap-x-2 items-center mt-20'>
+            <div className=' flex justify-center gap-x-2 items-center  mt-20'>
                 <Image src={'/assets/undraw_link_shortener.svg'} alt='profile link image' height={48} width={48}></Image>
                 <span className=' text-3xl'>Public Profile Link</span>
             </div>
-            <div className=' px-7 sm:px-14'>
+            <div className=' px-10 sm:px-14'>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                         <FormField
@@ -72,7 +89,7 @@ const page = () => {
                             name="content"
                             render={({ field }) => (
                                 <FormItem>
-                                    <FormLabel>Send Anonymous Message to @{username}</FormLabel>
+                                    <FormLabel className='py-2 px-1'>Send Anonymous Message to @{username}</FormLabel>
                                     <FormControl>
                                         <Textarea
                                             placeholder="Write your anonymous message here"
@@ -98,6 +115,25 @@ const page = () => {
                         </div>
                     </form>
                 </Form>
+            </div>
+            <div className='flex flex-col justify-center items-center mt-24'>
+                <Image src={'/assets/undraw_new_message.svg'} alt='Image' height={250} width={250}></Image>
+                <div className='mt-14 mb-10 '>
+                    <Button variant={'secondary'} onClick={handleRefresh}>Suggest Message</Button>
+                </div>
+                <div className=' my-4 w-[40%]'>
+                    <RotateCwSquare className='inline mr-1' />
+                    <span >Click on any message below to select it</span>
+                </div>
+                <ul className='border shadow-md dark:shadow-gray-900  rounded-md py-10 px-20'>
+                    {displyMessages.map((mes, index) => (
+                        <li onClick={() => { handleCopy(mes) }} className=' border hover:dark:bg-slate-950 hover:bg-gray-100 rounded py-4 my-6 px-6' key={index}>{mes}</li>
+                    ))}
+                </ul>
+                <div className='my-16  shadow-md dark:shadow-gray-900 border py-6 px-16 rounded-md'>
+                    <h1 className='mb-7'>Get Your Message board</h1>
+                    <Link className='bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-3 rounded' href={'/sign-up'}> Create your account</Link>
+                </div>
             </div>
         </div>
     )
