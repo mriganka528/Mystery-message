@@ -79,7 +79,7 @@ export default function Home() {
         <Link href={'/'}>
           <Image src={'/assets/undraw_moving_forward.svg'} alt="Loading" height={50} width={50} className=" h-[40px] w-[40px] sm:h-[50px] sm:w-[50px]" ></Image>
         </Link>
-        <span className="dark:text-gray-400 text-sm sm:text-base text-gray-600 antialiased"> © 2023 True Feedback. All rights reserved. </span>
+        <span className="dark:text-gray-400 text-sm sm:text-base text-gray-600 antialiased"> © 2023 Mystic Pulse. All rights reserved. </span>
       </div>
     </main>
   );
