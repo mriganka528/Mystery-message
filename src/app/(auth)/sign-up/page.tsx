@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button"
 import { Loader2 } from "lucide-react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
-const page = () => {
+const Page = () => {
     const [username, setUsername] = useState('');
     const [usernameMessage, setUsernameMessage] = useState('');
     const [isCheckingUsername, setIsCheckingUsename] = useState(false);
@@ -163,4 +163,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

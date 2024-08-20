@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import * as  z from 'zod'
-const page = () => {
+const Page = () => {
     const router = useRouter()
     const form = useForm<z.infer<typeof signInSchema>>({
         resolver: zodResolver(signInSchema),
@@ -98,4 +98,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page
