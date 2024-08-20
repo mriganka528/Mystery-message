@@ -31,11 +31,11 @@ export default function Home() {
           <h1 className="text-4xl antialiased text-left  font-bold ">MysticPulse</h1>
         </div>
       </div>
-      <div className="w-svw flex justify-center space-x-[5rem] items-center mt-20">
-        <div className="flex justify-center  space-x-8  antialiased items-center  border-l-2 max-w-[45%]">
-          <Image src={'/assets/undraw_mobile_content_xvgr.svg'} height={280} width={280} alt="Loading"></Image>
+      <div className="w-svw flex flex-col lg:flex-row  justify-center lg:space-x-[5rem] items-center mt-20">
+        <div className="flex justify-center space-x-8  antialiased items-center  border-l-2 max-w-[90%] md:max-w-[70%] lg:max-w-[45%]">
+          <Image src={'/assets/undraw_mobile_content_xvgr.svg'} height={280} width={280}  alt="Loading"></Image>
           <div>
-            <h1 className="text-2xl antialiased">Dive into the unexplained with StrangeSignal, the app that uncovers the secrets behind every message</h1>
+            <h1 className=" text-lg sm:text-xl lg:text-2xl antialiased">Dive into the unexplained with StrangeSignal, the app that uncovers the secrets behind every message</h1>
             <div className="mt-7">
               {session ? (
                 <Link className="bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-3 rounded " href={"/dashboard"}>Join MysticPulse</Link>
@@ -46,7 +46,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div>
+        <div className="mt-16 lg:mt-0">
           <Carousel plugins={[Autoplay({ delay: 1500 })]} className="w-full max-w-xs">
             <CarouselContent>
               {messages.messages.map((message: CustomMessage) => (
