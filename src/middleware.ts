@@ -12,7 +12,7 @@ export const config = {
 };
 
 export async function middleware(request: NextRequest) {
-    const token = request.cookies.get("next-auth.session-token")?.value;
+    const token = request.cookies.get("__Secure-next-auth.session-token")?.value;
     const url = request.nextUrl;
     // Redirect to dashboard if the user is already authenticated
     // and trying to access sign-in, sign-up, or home page

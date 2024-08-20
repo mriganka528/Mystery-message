@@ -40,7 +40,6 @@ const Page = () => {
                 try {
                     const response = await axios.get(`/api/check-username-uniqueness?username=${username}`)
                     let message = response.data.message
-                    console.log(message)
                     setUsernameMessage(message)
                 } catch (error) {
                     const axiosError = error as AxiosError<ApiResponse>;

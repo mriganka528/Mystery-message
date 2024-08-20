@@ -171,7 +171,7 @@ const Page = () => {
           ))}
         </ul>
         <div className="my-16 shadow-md dark:shadow-gray-900 border py-6 px-16 rounded-md">
-          <h1 className="mb-7">Get Your Message board</h1>
+          <h1 className="mb-7">Get Your Message Board</h1>
           <Link
             className="bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-3 rounded"
             href={'/sign-up'}
