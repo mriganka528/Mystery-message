@@ -82,24 +82,24 @@ const Page = () => {
   return (
     <div >
       <div className="mt-10 flex justify-center">
-        <div className="shadow-md dark:shadow-gray-900 flex justify-center w-[30%] space-x-2 pb-3 rounded-sm items-center">
+        <div className="shadow-md dark:shadow-gray-900 px-4 sm:px-0  flex justify-center md:w-[30%] space-x-2 pb-3 rounded-sm items-center">
           <Image
             src={'/assets/undraw_moving_forward.svg'}
             alt="Loading"
             height={55}
             width={55}
-          />
-          <h1 className="text-4xl antialiased text-left font-bold">MysticPulse</h1>
+            className=" h-[35px] w-[35px] sm:h-[55px] sm:w-[55px]" />
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl antialiased text-left  font-bold ">MysticPulse</h1>
         </div>
       </div>
-      <div className="flex justify-center gap-x-2 items-center mt-20">
+      <div className="flex justify-center gap-x-2 items-center mt-20 mb-4 sm:mb-0">
         <Image
           src={'/assets/undraw_link_shortener.svg'}
           alt="profile link image"
           height={48}
           width={48}
         />
-        <span className="text-3xl antialiased">Public Profile Link</span>
+        <span className=" text-xl sm:text-3xl antialiased">Public Profile Link</span>
       </div>
       <div className="px-10 sm:px-14">
         <Form {...form}>
@@ -109,7 +109,7 @@ const Page = () => {
               name="content"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="py-2 antialiased">
+                  <FormLabel className="py-2 text-sm sm:text-base antialiased">
                     Send Anonymous Message to @{username}
                   </FormLabel>
                   <FormControl>
@@ -146,24 +146,24 @@ const Page = () => {
           src={'/assets/undraw_new_message.svg'}
           alt="Image"
           height={250}
-          width={250}
+          width={250} className='h-[200px] w-[200px] sm:h-[250px] sm:w-[250px]'
         />
         <div className="mt-14 mb-10">
           <Button variant={'secondary'} size={'lg'} onClick={handleRefresh}>
             Suggest Message
           </Button>
         </div>
-        <div className="my-4 w-[41%]">
+        <div className="my-4 w-[80%] sm:w-[41%] ">
           <RotateCwSquare className="inline mr-1" />
           <span className=' antialiased '>Click on any message below to select it</span>
         </div>
-        <ul className="border shadow-md dark:shadow-gray-900 rounded-md py-10 px-20">
+        <ul className="border shadow-md dark:shadow-gray-900 rounded-md py-10 mx-8 sm:mx-0 px-7 md:px-20">
           {displayMessages.map((mes, index) => (
             <li
               onClick={() => {
                 handleCopy(mes);
               }}
-              className=" border  shadow-md dark:shadow-gray-900 antialiased hover:dark:bg-slate-950 hover:bg-gray-100 rounded py-4 my-6 px-6"
+              className=" border  shadow-md dark:shadow-gray-900 antialiased hover:dark:bg-slate-950 hover:bg-gray-100 rounded py-2 sm:py-4 my-3 sm:my-6 px-3 sm:px-6"
               key={index}
             >
               {mes}

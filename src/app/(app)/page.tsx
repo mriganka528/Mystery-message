@@ -26,41 +26,41 @@ export default function Home() {
   return (
     <main className=" mt-20 h-svh flex flex-col justify-between">
       <div className="mt-10 flex justify-center  ">
-        <div className=" shadow-md dark:shadow-gray-900 flex justify-center w-[30%] space-x-2 pb-3 rounded-sm items-center">
-          <Image src={'/assets/undraw_moving_forward.svg'} alt="Loading" height={55} width={55}></Image>
-          <h1 className="text-4xl antialiased text-left  font-bold ">MysticPulse</h1>
+        <div className=" shadow-md dark:shadow-gray-900 px-4 sm:px-0 flex justify-center md:w-[30%] space-x-2 pb-3 rounded-sm items-center">
+          <Image src={'/assets/undraw_moving_forward.svg'} alt="Loading" height={55} width={55} className=" h-[35px] w-[35px] sm:h-[55px] sm:w-[55px]"></Image>
+          <h1 className=" text-xl sm:text-2xl md:text-3xl lg:text-4xl antialiased text-left  font-bold ">MysticPulse</h1>
         </div>
       </div>
       <div className="w-svw flex flex-col lg:flex-row  justify-center lg:space-x-[5rem] items-center mt-20">
-        <div className="flex justify-center space-x-8  antialiased items-center  border-l-2 max-w-[90%] md:max-w-[70%] lg:max-w-[45%]">
-          <Image src={'/assets/undraw_mobile_content_xvgr.svg'} height={280} width={280}  alt="Loading"></Image>
+        <div className="flex justify-center space-x-2.5 sm:space-x-8 mx-9 sm:mx-0  antialiased items-center  border-l-2 max-w-[88%] md:max-w-[70%] lg:max-w-[45%]">
+          <Image src={'/assets/undraw_mobile_content_xvgr.svg'} height={280} width={280} className="h-[200px] w-[200px] sm:h-[280px] sm:w-[280px]" alt="Loading"></Image>
           <div>
-            <h1 className=" text-lg sm:text-xl lg:text-2xl antialiased">Dive into the unexplained with StrangeSignal, the app that uncovers the secrets behind every message</h1>
+            <h1 className=" text-md sm:text-xl  md::text-2xl antialiased">Dive into the unexplained with StrangeSignal, the app that uncovers the secrets behind every message</h1>
             <div className="mt-7">
               {session ? (
-                <Link className="bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-3 rounded " href={"/dashboard"}>Join MysticPulse</Link>
+                <Link className="bg-primary text-primary-foreground hover:bg-primary/90 h-10 text-xs sm:text-base px-1.5 sm:px-4 py-3 rounded " href={"/dashboard"}>Join MysticPulse</Link>
               ) : (
-                <Link className="bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-3 rounded " href={"/sign-up"}>Join MysticPulse</Link>
+                <Link className="bg-primary text-primary-foreground hover:bg-primary/90 h-10 text-xs sm:text-base px-1.5 sm:px-4 py-3 rounded " href={"/sign-up"}>Join MysticPulse</Link>
               )}
 
             </div>
           </div>
         </div>
-        <div className="mt-16 lg:mt-0">
-          <Carousel plugins={[Autoplay({ delay: 1500 })]} className="w-full max-w-xs">
+        <div className="mt-16 lg:mt-0  flex justify-center items-center">
+          <Carousel plugins={[Autoplay({ delay: 1500 })]} className="w-full  max-w-xs">
             <CarouselContent>
               {messages.messages.map((message: CustomMessage) => (
-                <CarouselItem key={message.id}>
+                <CarouselItem key={message.id} >
                   <div className="py-1">
-                    <Card>
+                    <Card >
                       <CardContent className="flex flex-col gap-y-3 antialiased justify-center px-6 py-12">
                         <div>
                           <Prf className="inline h-5 w-5 antialiased  " />
-                          <span className="text-md font-bold ml-2">{message.title}</span>
+                          <span className=" text-sm sm:text-base font-bold ml-2">{message.title}</span>
                         </div>
                         <div>
                           <MessageSquare className=" inline h-5 w-5 antialiased " />
-                          <p className="inline ml-2  antialiased font-medium">{message.content}</p>
+                          <p className="inline ml-2   antialiased font-medium">{message.content}</p>
                         </div>
                         <div>
                           <CheckCheck className=" inline h-4 w-4 antialiased " />
@@ -72,16 +72,14 @@ export default function Home() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
           </Carousel>
         </div>
       </div>
-      <div className="flex justify-between py-2.5 px-9 items-center bg-gray-50 dark:bg-[#21212135] backdrop-blur-sm">
+      <div className="flex justify-between py-2.5 px-1.5 sm:px-9 items-center bg-gray-50 dark:bg-[#21212135] backdrop-blur-sm">
         <Link href={'/'}>
-          <Image src={'/assets/undraw_moving_forward.svg'} alt="Loading" height={50} width={50}></Image>
+          <Image src={'/assets/undraw_moving_forward.svg'} alt="Loading" height={50} width={50} className=" h-[40px] w-[40px] sm:h-[50px] sm:w-[50px]" ></Image>
         </Link>
-        <span className="dark:text-gray-400 text-gray-600 antialiased"> © 2023 True Feedback. All rights reserved. </span>
+        <span className="dark:text-gray-400 text-sm sm:text-base text-gray-600 antialiased"> © 2023 True Feedback. All rights reserved. </span>
       </div>
     </main>
   );

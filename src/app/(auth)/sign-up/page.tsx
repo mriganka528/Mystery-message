@@ -78,12 +78,12 @@ const Page = () => {
         }
     }
     return (
-        <div className=" flex flex-col justify-around items-center min-h-screen  ">
-            <div className="mt-3 w-full flex justify-center  ">
-                <Link href={'/'} className=" shadow-md dark:shadow-gray-900 flex justify-center w-[30%] space-x-2 pb-3 rounded-sm items-center">
+        <div className=" flex flex-col justify-evenly sm:justify-around items-center min-h-screen  ">
+            <div className="mt-3 w-full flex   justify-center  ">
+                <Link href={'/'} className=" shadow-md dark:shadow-gray-900 px-4 sm:px-0 flex justify-center md:w-[30%] space-x-2 pb-3 rounded-sm items-center">
 
-                    <Image src={'/assets/undraw_moving_forward.svg'} alt="Loading" height={55} width={55}></Image>
-                    <h1 className="text-4xl antialiased text-left  font-bold ">MysticPulse</h1>
+                    <Image src={'/assets/undraw_moving_forward.svg'} alt="Loading" height={55} width={55} className=" h-[35px] w-[35px] sm:h-[55px] sm:w-[55px]"></Image>
+                    <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl antialiased text-left  font-bold ">MysticPulse</h1>
                 </Link>
             </div>
             <div className=" w-full max-w-md p-8 space-y-8  rounded-lg dark:shadow-gray-900 shadow-md">
