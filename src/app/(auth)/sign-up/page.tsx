@@ -66,7 +66,6 @@ const Page = () => {
             router.replace(`/verify/${username}`)
             setIsSubmitting(false);
         } catch (error) {
-            console.error("Error in sign up of user", error);
             const axiosError = error as AxiosError<ApiResponse>;
             let errorMessage = axiosError.response?.data.message
             toast({
@@ -100,7 +99,7 @@ const Page = () => {
                     ease: "easeInOut",
                 }} className=" w-full max-w-md p-8 space-y-8  rounded-lg dark:shadow-gray-900 shadow-md">
                 <div className="text-center">
-                    <h1 className=" mb-6">Join Mystery message</h1>
+                    <h1 className=" mb-6">Join MysticPulse</h1>
                     <p className=" mb-4">Signup to start your anonymous adventure</p>
                 </div>
                 <div>
