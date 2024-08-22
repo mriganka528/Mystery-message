@@ -26,8 +26,9 @@ export async function sendVerificationEmail(
             subject: "Mystic Pulse | verification email",
             html: `
                <h1>Hello ${username},</h1>
+               <br>
                <p style="font-size: 1.2rem;">Thank you for registering. Please use the following verification code to complete your registration </p>
-               <p style="font-size: 1.2rem;">Verification Code : ${verificationCode}</p>
+               <p style="font-size: 1.2rem; font-weight:bold;">Verification Code : ${verificationCode}</p>
                <p style="font-size: 1.2rem;">If you didn't request this code, please ignore this email.</p>
             ` ,
         });
