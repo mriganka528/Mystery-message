@@ -23,7 +23,7 @@ export async function sendVerificationEmail(
                 address: "mrj21012003@gmail.com"
             },
             to: email,
-            subject: "Mystic Pulse | verification email",
+            subject: "MysticPulse | verification email",
             html: `
                <h1>Hello ${username},</h1>
                <br>
