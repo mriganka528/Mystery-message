@@ -10,12 +10,11 @@ import { ApiResponse } from '@/types/ApiResponse';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios, { AxiosError } from 'axios';
 import { LayoutDashboard, Loader2, RefreshCcw } from 'lucide-react';
-import { User } from 'next-auth';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-
+import { motion } from 'framer-motion';
 function Page() {
     const [messages, setMessages] = useState<Message[]>([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -125,21 +124,39 @@ function Page() {
     };
 
     if (!session || !session.user) {
-        return <div>Please Login</div>;
+        return;
     }
-   
+
     return (
         <div className="mt-32">
-            <div className=' flex justify-center items-center gap-x-2'>
+            <motion.div initial={{ opacity: 0.0, y: -40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                    delay: 0.1,
+                    duration: 0.7,
+                    ease: "easeInOut",
+                }} className=' flex justify-center items-center gap-x-2'>
                 <Image src={'/assets/undraw_welcoming.svg'} alt='welcome image' height={55} width={55}></Image>
                 <h1 className='text-center antialiased text-xl font-medium ' >Welcome, {session.user.username}</h1>
-            </div>
+            </motion.div>
             <div className='my-8 mx-0 sm:mx-4  lg:mx-auto pt-10 p-6 lg:border-l-2  border-l-0 pl-6 rounded w-full max-w-5xl'>
-                <div className=' flex items-center '>
+                <motion.div initial={{ opacity: 0.0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{
+                        delay: 0.1,
+                        duration: 0.7,
+                        ease: "easeInOut",
+                    }} className=' flex items-center '>
                     <LayoutDashboard className=' h-7 w-7 antialiased inline' />
                     <span className=" text-2xl sm:text-3xl pl-2 antialiased font-semibold ">User Dashboard</span>
-                </div>
-                <div className="mb-4 mt-10">
+                </motion.div>
+                <motion.div initial={{ opacity: 0.0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{
+                        delay: 0.1,
+                        duration: 0.7,
+                        ease: "easeInOut",
+                    }} className="mb-4 mt-10">
                     <h2 className="text-lg font-semibold mb-2">Copy Your Unique Link</h2>{' '}
                     <div className="flex items-center">
                         <input
@@ -150,9 +167,15 @@ function Page() {
                         />
                         <Button onClick={copyToClipboard}>Copy</Button>
                     </div>
-                </div>
+                </motion.div>
 
-                <div className="mb-4">
+                <motion.div initial={{ opacity: 0.0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{
+                        delay: 0.1,
+                        duration: 0.7,
+                        ease: "easeInOut",
+                    }} className="mb-4">
                     <Switch
                         {...register('acceptMessages')}
                         checked={acceptMessages}
@@ -162,24 +185,45 @@ function Page() {
                     <span className="ml-2">
                         Accept Messages: {acceptMessages ? 'On' : 'Off'}
                     </span>
-                </div>
-                <Separator />
-
-                <Button
-                    className="mt-10"
-                    variant="outline"
-                    onClick={(e) => {
-                        e.preventDefault();
-                        fetchMessages(true);
-                    }}
-                >
-                    {isLoading ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                    ) : (
-                        <RefreshCcw className="h-4 w-4" />
-                    )}
-                </Button>
-                <div className="mt-4  grid grid-cols-1 md:grid-cols-2 gap-6">
+                </motion.div>
+                <motion.div initial={{ opacity: 0.0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{
+                        delay: 0.1,
+                        duration: 0.7,
+                        ease: "easeInOut",
+                    }}>
+                    <Separator />
+                </motion.div>
+                <motion.div initial={{ opacity: 0.0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{
+                        delay: 0.1,
+                        duration: 0.7,
+                        ease: "easeInOut",
+                    }}>
+                    <Button
+                        className="mt-10"
+                        variant="outline"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            fetchMessages(true);
+                        }}
+                    >
+                        {isLoading ? (
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : (
+                            <RefreshCcw className="h-4 w-4" />
+                        )}
+                    </Button>
+                </motion.div>
+                <motion.div initial={{ opacity: 0.0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{
+                        delay: 0.1,
+                        duration: 0.7,
+                        ease: "easeInOut",
+                    }} className="mt-4  grid grid-cols-1 md:grid-cols-2 gap-6">
                     {messages.length > 0 ? (
                         messages.map((message) => (
                             <MessageCard
@@ -195,10 +239,10 @@ function Page() {
                             <Image src={'/assets/undraw_void.svg'} alt='Nothing' height={150} width={150}></Image>
                         </div>
                     )}
-                </div>
+                </motion.div>
             </div>
-           
-        </div>
+
+        </div >
     );
 }
 

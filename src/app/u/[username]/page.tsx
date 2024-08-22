@@ -22,7 +22,7 @@ import { ApiResponse } from '@/types/ApiResponse';
 import { toast } from '@/components/ui/use-toast';
 import sampleMessages from '@/data/sampleMessages.json';
 import Link from 'next/link';
-
+import { motion } from 'framer-motion';
 const Page = () => {
   const params = useParams<{ username: string }>();
   const username = params.username;
@@ -80,8 +80,14 @@ const Page = () => {
   };
 
   return (
-    <div >
-      <div className="mt-10 flex justify-center">
+    <div  >
+      <motion.div initial={{ opacity: 0.0, y: -40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{
+          delay: 0.1,
+          duration: 0.7,
+          ease: "easeInOut",
+        }} className="mt-10 flex justify-center">
         <div className="shadow-md dark:shadow-gray-900 px-4 sm:px-0  flex justify-center md:w-[30%] space-x-2 pb-3 rounded-sm items-center">
           <Image
             src={'/assets/undraw_moving_forward.svg'}
@@ -91,8 +97,14 @@ const Page = () => {
             className=" h-[35px] w-[35px] sm:h-[55px] sm:w-[55px]" />
           <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl antialiased text-left  font-bold ">MysticPulse</h1>
         </div>
-      </div>
-      <div className="flex justify-center gap-x-2 items-center mt-20 mb-4 sm:mb-0">
+      </motion.div>
+      <motion.div initial={{ opacity: 0.0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{
+          delay: 0.1,
+          duration: 0.7,
+          ease: "easeInOut",
+        }} className="flex justify-center gap-x-2 items-center mt-20 mb-4 sm:mb-0">
         <Image
           src={'/assets/undraw_link_shortener.svg'}
           alt="profile link image"
@@ -100,8 +112,14 @@ const Page = () => {
           width={48}
         />
         <span className=" text-xl sm:text-3xl antialiased">Public Profile Link</span>
-      </div>
-      <div className="px-10 sm:px-14">
+      </motion.div>
+      <motion.div initial={{ opacity: 0.0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{
+          delay: 0.1,
+          duration: 0.7,
+          ease: "easeInOut",
+        }} className="px-10 sm:px-14">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
@@ -135,13 +153,19 @@ const Page = () => {
                 </Button>
               )}
               <div className=' ml-3'>
-                  <Button type='button' variant={'destructive'} onClick={()=>{form.setValue('content',' ')}}> Clear text</Button>
+                <Button type='button' variant={'destructive'} onClick={() => { form.setValue('content', ' ') }}> Clear text</Button>
               </div>
             </div>
           </form>
         </Form>
-      </div>
-      <div className="flex flex-col justify-center items-center mt-24">
+      </motion.div>
+      <motion.div initial={{ opacity: 0.0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{
+          delay: 0.1,
+          duration: 0.7,
+          ease: "easeInOut",
+        }} className="flex flex-col justify-center items-center mt-24">
         <Image
           src={'/assets/undraw_new_message.svg'}
           alt="Image"
@@ -157,7 +181,13 @@ const Page = () => {
           <RotateCwSquare className="inline mr-1" />
           <span className=' antialiased '>Click on any message below to select it</span>
         </div>
-        <ul className="border shadow-md dark:shadow-gray-900 rounded-md py-10 mx-8 sm:mx-0 px-7 md:px-20">
+        <motion.ul initial={{ opacity: 0.0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.1,
+            duration: 0.7,
+            ease: "easeInOut",
+          }} className="border shadow-md dark:shadow-gray-900 rounded-md py-10 mx-8 sm:mx-0 px-7 md:px-20">
           {displayMessages.map((mes, index) => (
             <li
               onClick={() => {
@@ -169,8 +199,14 @@ const Page = () => {
               {mes}
             </li>
           ))}
-        </ul>
-        <div className="my-16 shadow-md dark:shadow-gray-900 border py-6 px-7 sm:px-16 rounded-md">
+        </motion.ul>
+        <motion.div initial={{ opacity: 0.0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.1,
+            duration: 0.7,
+            ease: "easeInOut",
+          }} className="my-16 shadow-md dark:shadow-gray-900 border py-6 px-7 sm:px-16 rounded-md">
           <h1 className="mb-7">Get Your Message Board</h1>
           <Link
             className="bg-primary text-primary-foreground hover:bg-primary/90 h-9 p-3  rounded-md"
@@ -178,8 +214,8 @@ const Page = () => {
           >
             Create your account
           </Link>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };

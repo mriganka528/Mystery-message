@@ -9,10 +9,13 @@ import { signIn } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as  z from 'zod'
+import { motion } from 'framer-motion'
+import { Loader2 } from 'lucide-react'
 const Page = () => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const router = useRouter()
     const form = useForm<z.infer<typeof signInSchema>>({
         resolver: zodResolver(signInSchema),
@@ -22,6 +25,7 @@ const Page = () => {
         }
     })
     const onSubmit = async (data: z.infer<typeof signInSchema>) => {
+        setIsSubmitting(true);
         const result = await signIn('credentials', {
             redirect: false,
             identifier: data.identifier,
@@ -37,17 +41,31 @@ const Page = () => {
         if (result?.url) {
 
             router.replace('/dashboard')
+            setIsSubmitting(false)
         }
+        setIsSubmitting(false)
     }
     return (
         <div className=" flex  flex-col justify-evenly sm:justify-around items-center min-h-screen   ">
-            <div className="mt-2 w-full  flex justify-center  ">
+            <motion.div initial={{ opacity: 0.0, y: -40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                    delay: 0.1,
+                    duration: 0.7,
+                    ease: "easeInOut",
+                }} className="mt-2 w-full  flex justify-center  ">
                 <Link href={'/'} className=" shadow-md px-4 sm:px-0  dark:shadow-gray-900 flex justify-center md:w-[30%] space-x-2 pb-3 rounded-sm items-center">
                     <Image src={'/assets/undraw_moving_forward.svg'} alt="Loading" height={55} width={55} className=" h-[35px] w-[35px] sm:h-[55px] sm:w-[55px]"></Image>
                     <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl antialiased text-left  font-bold ">MysticPulse</h1>
                 </Link>
-            </div>
-            <div className=" w-full max-w-sm p-8 space-y-8 dark:shadow-gray-900 rounded-lg shadow-md">
+            </motion.div>
+            <motion.div initial={{ opacity: 0.0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                    delay: 0.1,
+                    duration: 0.7,
+                    ease: "easeInOut",
+                }} className=" w-full max-w-sm p-8 space-y-8 dark:shadow-gray-900 rounded-lg shadow-md">
                 <div className="text-center">
                     <h1 className=" mb-6">Join MysticPulse</h1>
                     <p className=" mb-4">Sign in to start your anonymous adventure</p>
@@ -80,7 +98,13 @@ const Page = () => {
                                 </FormItem>
                             )}
                         />
-                        <Button type="submit">Sign In</Button>
+                        <Button type="submit" disabled={isSubmitting}>
+                            {
+                                isSubmitting ? (<>
+                                    <Loader2 className=" mr-2 h-4 w-5 animate-spin" /> Please wait
+                                </>) : ('Sign In')
+                            }
+                        </Button>
                     </form>
                 </Form>
                 <div className="text-center mt-4">
@@ -91,7 +115,7 @@ const Page = () => {
                         </Link>
                     </p>
                 </div>
-            </div>
+            </motion.div>
         </div>
     )
 }
